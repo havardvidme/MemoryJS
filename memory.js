@@ -1,3 +1,8 @@
+// Card click handler event.
+var cardClickHandler = function (event) {
+    this.classList.toggle('open');
+};
+
 // Get cards container.
 var cards = document.getElementById('cards');
 
@@ -38,11 +43,15 @@ for (var cardIndex = 0; cardIndex < cardsTotal; cardIndex++) {
     // Get symbol for the card.
     var cardSymbol = symbolItems.splice(Math.floor(Math.random() * symbolItems.length), 1);
     front.appendChild(document.createTextNode(cardSymbol));
+    card.dataset.symbol = cardSymbol;
 
     // Add backside.
     var back = document.createElement('div');
     back.classList.add('back');
     flipper.appendChild(back);
+
+    // Add click listener.
+    card.addEventListener('click', cardClickHandler, false);
     
     // Append the card to the cards container.
     cards.appendChild(card);

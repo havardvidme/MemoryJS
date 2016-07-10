@@ -12,10 +12,15 @@ body {
     height: 400px;
 }
 .card {
+    cursor: pointer;
     display: block;
     float: left;
     height: 100px;
     perspective: 1000px;
+    user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
     width: 100px;
 }
 .front,
@@ -44,7 +49,6 @@ body {
 	transform-style: preserve-3d;
     transition: 0.3s;
 }
-.card:hover .flipper,
-.card.hover .flipper {
+.card.open .flipper {
     transform: rotateY(180deg);
 }
