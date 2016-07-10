@@ -5,14 +5,30 @@ var cards = document.getElementById('cards');
 var cardsHorizontal = 4;
 var cardsVertical = 4;
 var cardsTotal = cardsHorizontal * cardsVertical;
+var cardVariations = cardsTotal / 2;
+
+// Symbols
+var symbolItems = [];
+for (var symbolIndex = 0; symbolIndex < cardVariations; symbolIndex++) {
+    var symbolValue = String.fromCharCode(65 + symbolIndex);
+    symbolItems.push(symbolValue);
+    symbolItems.push(symbolValue);
+}
 
 // Add classes to cards container.
 cards.classList.add('cards', 'cards-horizontal-' + cardsHorizontal.toString(), 'cards-vertical-' + cardsVertical.toString());
 
 // Create each card and add to container.
 for (var cardIndex = 0; cardIndex < cardsTotal; cardIndex++) {
+    // Create a card with id and classes.
     var card = document.createElement('div');
     card.classList.add('card');
-    card.appendChild(document.createTextNode(cardIndex));
+    card.setAttribute('id', 'card-' + cardIndex.toString());
+    
+    // Get symbol for the card.
+    var cardSymbol = symbolItems.splice(Math.floor(Math.random() * symbolItems.length), 1);
+    card.appendChild(document.createTextNode(cardSymbol));
+    
+    // Append the card to the cards container.
     cards.appendChild(card);
 }
