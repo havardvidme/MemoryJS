@@ -12,11 +12,39 @@ body {
     height: 400px;
 }
 .card {
-    border: solid 1px;
-    box-sizing: border-box;
-    display: inline-block;
+    display: block;
+    float: left;
     height: 100px;
-    line-height: 100px;
-    text-align: center;
+    perspective: 1000px;
     width: 100px;
+}
+.front,
+.back {
+    backface-visibility: hidden;
+	height: 90px;
+    left: 0;
+    margin: 5px;
+	position: absolute;
+	top: 0;
+    width: 90px;
+}
+.front {
+    background-color: #ccf;
+    line-height: 90px;
+    text-align: center;
+	transform: rotateY(180deg);
+}
+.back {
+    background-color: #fcc;
+	transform: rotateY(0deg);
+    z-index: 2;
+}
+.flipper {
+    position: relative;
+	transform-style: preserve-3d;
+    transition: 0.3s;
+}
+.card:hover .flipper,
+.card.hover .flipper {
+    transform: rotateY(180deg);
 }
