@@ -1,3 +1,22 @@
 body {
     margin: 0;
 }
+.cards {
+    border: solid 1px;
+    margin: 40px auto;
+}
+.cards-horizontal-4 {
+    width: 400px;
+}
+.cards-vertical-4 {
+    height: 400px;
+}
+.card {
+    border: solid 1px;
+    box-sizing: border-box;
+    display: inline-block;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    width: 100px;
+}
