@@ -1,10 +1,68 @@
 // Card click handler event.
 var cardClickHandler = function (event) {
-    this.classList.toggle('open');
+    // Block action if user selects more than two cards.
+    if (selectedCards.length < 2) {
+        if (!this.classList.contains('open', 'done')) {
+            this.classList.add('open');
+
+            // Put selected card id in global list.
+            selectedCards.push(this.id);
+
+            // Make sure two cards have been opened.
+            if (selectedCards.length == 2) {
+                // Get first selected card and verify.
+                var alpha = document.getElementById(selectedCards[0]);
+                if (alpha === null) {
+                    console.error('Could not access card with id "%s".', selectedCards[0]);
+                }
+                // Get second selected card and verify.
+                var omega = document.getElementById(selectedCards[1]);
+                if (omega === null) {
+                    console.error('Could not access card with id "%s".', selectedCards[1]);
+                }
+                
+                // Handle success or failure on timeout.
+                var success = alpha.dataset.symbol === omega.dataset.symbol;
+                var interval = success ? 250 : 750;
+                cardsCloseTimeout = setTimeout(cardsCloseTimeoutHandler.bind(null, success), interval);
+            }
+        }
+    }
+};
+
+// Timeout handler when comparing card values.
+var cardsCloseTimeoutHandler = function (success) {
+    // Get first selected card and verify.
+    var alpha = document.getElementById(selectedCards[0]);
+    if (alpha === null) {
+        console.error('Could not access card with id "%s".', selectedCards[0]);
+    }
+    // Get second selected card and verify.
+    var omega = document.getElementById(selectedCards[1]);
+    if (omega === null) {
+        console.error('Could not access card with id "%s".', selectedCards[1]);
+    }
+    
+    // Perform action on cards.
+    if (success) {
+        alpha.classList.add('done');
+        omega.classList.add('done');
+    } else {
+        alpha.classList.remove('open');
+        omega.classList.remove('open');
+    }
+    
+    // Emtpy selected cards and clear timeout.
+    selectedCards = [];
+    clearTimeout(cardsCloseTimeout);
 };
 
 // Get cards container.
 var cards = document.getElementById('cards');
+
+// Selected cards
+var selectedCards = [];
+var cardsCloseTimeout = null;
 
 // Set card values.
 var cardsHorizontal = 4;
