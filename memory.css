@@ -8,11 +8,10 @@ a {
     color: rgb(51,51,255);
 }
 .cards {
-    border: solid 1px;
-    border-radius: 8px;
-    margin: 40px auto;
+    margin: 0 auto;
 }
 .cards-horizontal-4 {
+    margin-top: calc(50vh - 200px);
     width: 400px;
 }
 .cards-vertical-4 {
