@@ -59,7 +59,8 @@ var cardsCloseTimeoutHandler = function (success) {
     
     // Check if game is over.
     if (pairsFound == pairsTotal) {
-        console.log('Done!')
+        // Show victory message.
+        document.getElementById('victory').classList.add('visible');
     }
 
     // Emtpy selected cards and clear timeout.
