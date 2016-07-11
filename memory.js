@@ -45,13 +45,23 @@ var cardsCloseTimeoutHandler = function (success) {
     
     // Perform action on cards.
     if (success) {
+        // Set cards as "done"
         alpha.classList.add('done');
         omega.classList.add('done');
+
+        // Increment pairs found.
+        pairsFound++;
     } else {
+        // Reset open cards.
         alpha.classList.remove('open');
         omega.classList.remove('open');
     }
     
+    // Check if game is over.
+    if (pairsFound == pairsTotal) {
+        console.log('Done!')
+    }
+
     // Emtpy selected cards and clear timeout.
     selectedCards = [];
     clearTimeout(cardsCloseTimeout);
@@ -68,11 +78,14 @@ var cardsCloseTimeout = null;
 var cardsHorizontal = 4;
 var cardsVertical = 4;
 var cardsTotal = cardsHorizontal * cardsVertical;
-var cardVariations = cardsTotal / 2;
+
+// Pairs.
+var pairsTotal = cardsTotal / 2;
+var pairsFound = 0;
 
 // Symbols
 var symbolItems = [];
-for (var symbolIndex = 0; symbolIndex < cardVariations; symbolIndex++) {
+for (var symbolIndex = 0; symbolIndex < pairsTotal; symbolIndex++) {
     var symbolValue = String.fromCharCode(65 + symbolIndex);
     symbolItems.push(symbolValue);
     symbolItems.push(symbolValue);
